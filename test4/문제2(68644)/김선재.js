@@ -15,7 +15,7 @@ function solution(numbers) {
   }
 
   answer = Array.from(set);
-  answer.sort();
+  answer.sort((a, b) => a - b);
 
   return answer;
 }
