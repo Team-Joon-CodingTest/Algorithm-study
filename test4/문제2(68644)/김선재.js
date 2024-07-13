@@ -8,15 +8,14 @@ function solution(numbers) {
   const set = new Set();
 
   for (let i = 0; i < N; i++) {
-    for (let j = 0; j < N; i++) {
-      if (i !== j) {
-        sum = numbers[i] + numbers[j];
-        set.add(sum);
-      }
+    for (let j = i + 1; j < N; j++) {
+      sum = numbers[i] + numbers[j];
+      set.add(sum);
     }
   }
 
   answer = Array.from(set);
+  answer.sort();
 
   return answer;
 }
