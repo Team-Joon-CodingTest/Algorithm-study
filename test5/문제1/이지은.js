@@ -1,11 +1,11 @@
 function solution(food) {
-  var answer = [];
+  var answer = '';
 
   for (let i = 1; i < food.length; i++) {
     let num = Math.floor(food[i] / 2);
 
-    answer.push(food[i] * num);
+    answer += i.toString().repeat(num);
   }
 
-  return answer;
+  return answer + '0' + answer.split('').reverse().join('');
 }
