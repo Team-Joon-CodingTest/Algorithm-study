@@ -9,11 +9,10 @@ input = sys.stdin.readline
 
 # 소수 찾는 함수 (제곱근 사용)
 def is_prime(num):
-    for i in range(2, int(num**1//2)+1):
-        if num % i == 0:    # 소수가 아님
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:  # 소수가 아님
             return False
-        else:
-            return True
+    return True
 
 
 t = int(input())
@@ -28,4 +27,3 @@ for _ in range(t):
             break
         else:
             n += 1
-
