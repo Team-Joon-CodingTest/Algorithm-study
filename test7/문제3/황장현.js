@@ -12,7 +12,8 @@ readline
   .on('close', function () {
     // 솔루션 작성
     const A = parseInt(input[0]);
-
+    if (A % 2 == 0) console.log('SK');
+    else console.log('CY');
     process.exit();
   });
 
