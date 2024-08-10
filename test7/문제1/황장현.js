@@ -11,6 +11,26 @@ readline
   })
   .on('close', function () {
     // 솔루션 작성
+    const A = parseInt(input[0]);
+    let length = 64,
+      currentStick = 64,
+      answer = 1;
+
+    if (A === 64) {
+      console.log(answer);
+    } else {
+      while (1) {
+        currentStick /= 2;
+        length -= currentStick;
+        if (length < A) {
+          answer++;
+          length += currentStick;
+        } else if (length === A) {
+          break;
+        }
+      }
+      console.log(answer);
+    }
 
     process.exit();
   });
