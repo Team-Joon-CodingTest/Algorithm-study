@@ -1,16 +1,5 @@
-ejinsu = str(input())
+etos = int(input(), 2) # 2진수를 10진수로 변환
 
-temp = ''
+stop = oct(etos) # 10진수를 8진수로 변환
 
-for i in range(len(ejinsu)-1, -1, -1):
-    temp += ejinsu[i]
-ary = []
-cnt = 0
-num = 0
-for i in range(len(temp)):
-    cnt += 1
-    num += int(temp[i])*(2**cnt)
-    if cnt == 3:
-        print(num)
-        num = 0
-        cnt = 0 
+print(stop[2:]) # 0o 제외 하고 출력
