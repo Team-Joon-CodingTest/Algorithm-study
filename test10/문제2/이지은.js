@@ -2,24 +2,27 @@ const input = require('fs')
   .readFileSync(process.platform === 'linux' ? '/dev/stdin' : './input.txt')
   .toString()
   .trim();
-// .split(' ');
-console.log(input);
 
 function solution(num) {
-  // console.log(num.split('0'));
-  oneArr = num.split('0');
-  one = oneArr.length;
-  console.log('one', one);
-  const oneNum = oneArr.filter((num) => num === '').length;
-  console.log('oneNum', oneNum);
+  let zero = 0;
+  let one = 0;
 
-  console.log(num.split('1'));
-  zeroArr = num.split('1');
-  zero = zeroArr.length;
-  const zeroNum = zeroArr.filter((num) => num === '').length;
+  if (num[0] === '0') {
+    zero++;
+  } else {
+    one++;
+  }
 
-  let answer = Math.min(one - oneNum, zero - zeroNum);
-  return answer;
+  for (let i = 1; i < num.length; i++) {
+    if (num[i] !== num[i - 1]) {
+      if (num[i] === '0') {
+        zero++;
+      } else {
+        one++;
+      }
+    }
+  }
+  return (answer = Math.min(zero, one));
 }
 
 console.log(solution(input));
