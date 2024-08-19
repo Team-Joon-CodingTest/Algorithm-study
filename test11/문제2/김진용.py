@@ -9,4 +9,5 @@ for i in range(k, n + k):
     sum += ary[ni] # 오른쪽 값 추가
     sum -= ary[ni - k] # 왼쪽 값 감소
     ans = max(ans, sum)
+
 print(ans)
