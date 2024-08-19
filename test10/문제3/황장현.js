@@ -13,19 +13,23 @@ function solution(input) {
     let checkChar = {};
     let isValid = true;
 
-    for (let j = 0; j <= message.length; j++) {
+    for (let j = 0; j < message.length; j++) {
       let currentMessage = message[j];
-      let prevChar = message[j - 1];
 
-      if (checkChar[prevChar] === 3 && currentMessage !== prevChar) {
-        isValid = false;
-        break;
+      if (!checkChar[currentMessage]) {
+        checkChar[currentMessage] = 1;
+      } else {
+        checkChar[currentMessage] += 1;
       }
 
-      if (checkChar[currentMessage]) {
-        checkChar[currentMessage] += 1;
-      } else {
-        checkChar[currentMessage] = 1;
+      if (checkChar[currentMessage] === 3) {
+        if (j + 1 < message.length && message[j + 1] === currentMessage) {
+          checkChar[currentMessage] = 0;
+          j++;
+        } else {
+          isValid = false;
+          break;
+        }
       }
     }
     results.push(isValid ? 'OK' : 'FAKE');
