@@ -1,9 +1,10 @@
+import sys
 import heapq    # 기본적으로 최소힙임
 
-n = int(input())
+n = int(sys.stdin.readline())
 heap = []
 for i in range(n):
-    x = int(input())
+    x = int(sys.stdin.readline())
     if x > 0:
         heapq.heappush(heap, -x)    # 음수 붙여서 넣어주면 최대 힙으로 변환 가능
     elif x == 0:
