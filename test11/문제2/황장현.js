@@ -9,14 +9,27 @@ function solution(input) {
   const [n, k] = input[0];
   const tasty = input[1];
 
-  let currentSum = tasty.slice(0, k).reduce((a, b) => a + b, 0);
-  let maxSum = currentSum;
+  let maxSum = 0,
+    currentSum = 0;
 
-  for (let i = k; i < n; i++) {
-    currentSum = currentSum - tasty[i - k] + tasty[i];
-    if (currentSum > maxSum) {
-      maxSum = currentSum;
-    }
+  let left = 0,
+    right = k;
+
+  for (let i = 0; i < k; i++) maxSum += tasty[i];
+  currentSum = maxSum;
+
+  if (right === n) {
+    return maxSum;
   }
+
+  while (left < n) {
+    currentSum = currentSum - tasty[left++] + tasty[right++];
+
+    if (currentSum > maxSum) maxSum = currentSum;
+
+    if (right === n) right = 0;
+  }
+
+  return maxSum;
 }
 console.log(solution(input));
