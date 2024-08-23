@@ -4,14 +4,16 @@ input = sys.stdin.readline
 
 n = int(input())
 user = set()
+cnt = 0
 
 for _ in range(n):
-    chat = input()
+    chat = input().strip()
 
     if chat == "ENTER":
+        cnt += len(user)
         user.clear()
     else:
         user.add(chat)
 
-print(user)
-print(len(user))
+cnt += len(user)
+print(cnt)
