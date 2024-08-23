@@ -19,7 +19,9 @@ for _ in range(n):
     x = int(input())
 
     if x == 0:  # 배열에서 가장 큰 값 출력 (최대 힙으로 구현하고 첫번째 값 리턴)
-        print(-heapq.heappop(heap))
+        if len(heap) == 0:
+            print(0)
+        else:
+            print(-(heapq.heappop(heap)))
 
     heapq.heappush(heap, -x)
-
