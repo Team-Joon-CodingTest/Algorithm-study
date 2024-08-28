@@ -1,6 +1,3 @@
-"""
-틀렸음..
-"""
 import sys
 
 input = sys.stdin.readline
@@ -16,14 +13,20 @@ while True:
         if char == '[' or char == '(':
             stack.append(char)
 
-        if char == ']':
-            if len(stack) == 0 or stack.pop() != '[':
-                is_valid = "no"
-                break
-        if char == ')':
-            if len(stack) == 0 or stack.pop() != '(':
+        elif char == ']':
+            if len(stack) != 0 and stack[-1] == '[':    # 놓친 부분 (조건문 반대로)
+                stack.pop()
+            else:
                 is_valid = "no"
                 break
 
-    if string != '.':
-        print(is_valid)
+        elif char == ')':
+            if len(stack) != 0 and stack[-1] == '(':    # 놓친 부분
+                stack.pop()
+            else:
+                is_valid = "no"
+                break
+    if len(stack) != 0:     # 놓친 부분
+        is_valid = "no"
+
+    print(is_valid)
