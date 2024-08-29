@@ -5,29 +5,35 @@ const input = require('fs')
   .split('\n');
 
 function solution(input) {
-  let i = 0;
-  let result = [];
+  const result = [];
   const pairs = { '(': ')', '[': ']' };
-  while (1) {
-    console.log(i, result);
 
-    if (input[i] === '.') {
-      break;
-    }
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === '.') break;
+
     let store = [];
+    let isBalanced = true;
+
     for (let j = 0; j < input[i].length; j++) {
       let checkChar = input[i][j];
       if (checkChar === '(' || checkChar === '[') {
         store.push(checkChar);
-      }
-      if (checkChar === ')' || checkChar === ']') {
-        const lastGH = store.pop();
-        if (pairs[lastGH] !== checkChar) result.push('no');
+      } else if (checkChar === ')' || checkChar === ']') {
+        let lastChar = store.pop();
+        if (pairs[lastChar] !== checkChar) {
+          isBalanced = false;
+          break;
+        }
       }
     }
-    i++;
-    result.push('yes');
+
+    if (isBalanced && store.length === 0) {
+      result.push('yes');
+    } else {
+      result.push('no');
+    }
   }
+
   return result.join('\n');
 }
 
