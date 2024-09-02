@@ -13,8 +13,7 @@ function solution(input) {
       prefixSum[0] += arr[0];
     } else prefixSum[i] += prefixSum[i - 1] + arr[i];
   }
-  const plusArr = input.splice(4, input.length - 1);
-  console.log(plusArr);
+  const plusArr = input.splice(3, input.length - 1);
 
   for (x of plusArr) {
     let [start, end] = x.split(' ').map(Number);
