@@ -6,6 +6,8 @@ ary = []
 for _ in range(n):
     ary.append(list(input()))
 # print(ary)
+
+# 최대로 얻는 사탕 개수
 def check(a):
     mcnt = 1
     for i in range(n):
@@ -30,12 +32,12 @@ m = 0
 for i in range(n):
     for j in range(n):
         if i + 1 < n:
-            ary[i][j], ary[i+1][j] = ary[i+1][j], ary[i][j]
+            ary[i][j], ary[i+1][j] = ary[i+1][j], ary[i][j]     # 바꿔주고
             m = max(m, check(ary))
-            ary[i][j], ary[i+1][j] = ary[i+1][j], ary[i][j]
+            ary[i][j], ary[i+1][j] = ary[i+1][j], ary[i][j]     # 되돌리기
         if j + 1 < n:
-            ary[i][j], ary[i][j+1] = ary[i][j+1], ary[i][j]
+            ary[i][j], ary[i][j+1] = ary[i][j+1], ary[i][j]     # 바꿔주고
             m = max(m, check(ary))
-            ary[i][j], ary[i][j+1] = ary[i][j+1], ary[i][j]
+            ary[i][j], ary[i][j+1] = ary[i][j+1], ary[i][j]     # 되돌리기
 
 print(m)
