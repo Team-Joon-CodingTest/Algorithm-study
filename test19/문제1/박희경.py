@@ -1,6 +1,7 @@
 """
 슬라이딩 윈도우
 양쪽 거리 포함
+[0, 5, 2, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 10]
 """
 
 import sys
@@ -15,24 +16,27 @@ for _ in range(n):
 
     dict[x] = g
 
-max_x = max(dict.keys())
-dict_key = sorted(dict.keys())
+m = max(dict.keys())  # 좌표 최대
 
 # 거리에 맞는 얼음 무게
-value_list = [0] * (max_x + 1)
-for i in range(1, max_x + 1):
-    value_list[i] = dict.get(i, 0)
+value_list = [0] * (m + 1)
+for i in range(len(value_list)):    # 이것이 문제였음.......오답의 이유....
+    if i in dict.keys():
+        value_list[i] = dict[i]
+# [0, 5, 2, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 10]
 
 # 슬라이딩 윈도우
 start = 0
-end = 2 * k  # 양쪽 k 거리 포함
-sum_value = max_value = sum(value_list[start:end+1])
+end = 2 * k + 1  # 양쪽 k 거리 포함
+
+sum_value = max_value = sum(value_list[start:end])
+
 while end < len(value_list) - 1:
     sum_value -= value_list[start]
+    sum_value += value_list[end]
     start += 1
     end += 1
-    sum_value += value_list[end]
-    max_value = max(sum_value, max_value)
+
+    max_value = max(max_value, sum_value)
 
 print(max_value)
-
