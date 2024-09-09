@@ -19,7 +19,7 @@ def check(a):
 
         cnt = 1
         for j in range(1, n):
-            if a[j][i-1] == a[j][i]:
+            if a[j-1][i] == a[j][i]:
                 cnt += 1
             else:
                 cnt = 1
