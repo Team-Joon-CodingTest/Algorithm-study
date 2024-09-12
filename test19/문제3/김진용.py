@@ -15,6 +15,6 @@ result = 0
 
 for i in ary:
     cnt += 1
-    result += abs(cnt - i)  #   순위별로 불만족도 더해주기
+    result += abs(cnt - i)  #   순위별로 불만족도 더해주기+
 
 print(result)
