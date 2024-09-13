@@ -18,25 +18,38 @@ input = sys.stdin.readline
 n = int(input())
 
 grid = [list(map(int, input().split())) for _ in range(n)]
-same = True
+
+minusOne = 0
+zero = 0
+one = 0
 
 
-# 모두 같은 수
-def same_check(size, current_cnt):
-    for i in range(size - 1):
-        for j in range(size - 1):
-            if grid[i][j] != grid[i][j + 1]:
-                size //= 3
-                same_check(size, current_cnt)
-            else:
-                current_cnt[grid[i][j]] += 1
-            if grid[i][j] != grid[i + 1][j]:
-                size //= 3
-                same_check(size, current_cnt)
-            else:
-                current_cnt[grid[i][j]] += 1    # 개수 세는 거 다시..
-
-    return current_cnt
+# 모두 같은 수인지 체크
+def same_check(size, x, y):
+    for i in range(x, size + x):
+        for j in range(y, size + y):
+            if grid[x][y] != grid[i][j]:
+                return False
+        return True
 
 
-same_check(n, [0, 0, 0])
+def divide(size, x, y):
+    global minusOne, zero, one
+    if same_check(size, x, y):
+        if grid[x][y] == 1:
+            one += 1
+        elif grid[x][y] == 0:
+            zero += 1
+        else:
+            minusOne += 1
+    else:
+        new_size = size // 3
+        for i in range(3):
+            for j in range(3):
+                divide(new_size, x + i * new_size, y + j * new_size)
+
+
+divide(n, 0, 0)
+print(minusOne)
+print(zero)
+print(one)
