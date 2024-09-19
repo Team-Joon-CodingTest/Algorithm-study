@@ -8,25 +8,30 @@ const input = require('fs')
 function solution(input) {
   const [E, S, M] = input;
 
-  let e = 1,
-    s = 1,
-    m = 1;
-  let year = 1;
+  let year = { E: 1, S: 1, M: 1 };
+  let answer;
 
-  while (true) {
-    if (e === E && s === S && m === M) {
-      return year;
+  for (let i = 1; i < Infinity; i++) {
+    if (year['E'] === E && year['S'] === S && year['M'] === M) {
+      answer = i;
+
+      break;
     }
+    year['E'] += 1;
+    year['S'] += 1;
+    year['M'] += 1;
 
-    e += 1;
-    s += 1;
-    m += 1;
-    year += 1;
-
-    if (e > 15) e = 1;
-    if (s > 28) s = 1;
-    if (m > 19) m = 1;
+    if (year['E'] === 16) {
+      year['E'] = 1;
+    }
+    if (year['S'] === 29) {
+      year['S'] = 1;
+    }
+    if (year['M'] === 20) {
+      year['M'] = 1;
+    }
   }
+  return answer;
 }
 
 console.log(solution(input));
