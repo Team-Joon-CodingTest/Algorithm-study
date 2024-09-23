@@ -20,3 +20,4 @@ while True:
     lotto(arr, s[1:], 0, 0)
     print()
 
+

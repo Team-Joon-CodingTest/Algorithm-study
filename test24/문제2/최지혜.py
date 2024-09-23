@@ -15,7 +15,6 @@ def dfs():
         visited[i] = False # false로 다시 바꿔서 다른 수열을 탐색할 수 있도록 함
 
 
-
 n, m = map(int, input().split())
 s = [] # 탐색 중인 수열 저장하는 리스트
 visited = [False] * (n+1)
