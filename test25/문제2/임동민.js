@@ -4,22 +4,26 @@ const input = require('fs')
     .trim();
 
 function solution() {
-    const sideLength = 2 ** input + 1;
+    let sideLength = 4 * input - 3;
     const square = Array.from({ length: sideLength }, () => new Array(sideLength).fill(' '));
 
-    function drawSquare(square,positionX, positionY) {
-        for(let x=positionX; x<square.length; x++){
-            for(let y=positionY; y<square.length; y++){
+    function drawSquare(positionX, positionY, sideLength) {
+        if(sideLength < 1) return;
+
+        for(let x=positionX; x<positionX+sideLength; x++){
+            for(let y=positionY; y<positionY+sideLength; y++){
                 square[positionX][y] = "*";
                 square[x][positionY] = "*";
-                square[x][square.length-1] = "*";
-                square[square.length-1][y] = "*";
+                square[x][positionY+sideLength-1] = "*";
+                square[positionX+sideLength-1][y] = "*";
             }
         }
+
+        drawSquare(positionX+2,positionY+2,sideLength-4);
     }
 
-    drawSquare(square,0,0);
-    console.log(square.join('\n'));
+    drawSquare(0,0,sideLength);
+    console.log(square.map(e=> e.join('')).join('\n'));
 }
 
 solution();
