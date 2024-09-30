@@ -28,4 +28,6 @@ def dfs(x, y, ary2):
 for i in range(5):
     for j in range(5):
         dfs(i, j, [])
+
+
 print(len(result_set))
