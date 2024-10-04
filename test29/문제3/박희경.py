@@ -19,7 +19,7 @@ max_size = 0
 
 
 def bfs(x, y):
-    size = 0
+    size = 1
     q = deque([(x, y)])
     visited[x][y] = True
 
