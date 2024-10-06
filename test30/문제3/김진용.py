@@ -14,13 +14,13 @@ def bfs(x):
     q = deque([x])
     visited[x] = True
     while q:
-        cnt += 1
         nx = q.popleft()
         for i in graph[nx]:
             if not visited[i]:
+                cnt += 1
                 visited[i] = True
                 q.append(i)
 
 cnt = 0
 bfs(1)
-print(cnt-1) # 1번 컴퓨터가 걸린 횟수는 빼줘야함 왜냐하면 1번 컴퓨터로부터 걸린 컴퓨터 수니깐
+print(cnt) # 1번 컴퓨터가 걸린 횟수는 빼줘야함 왜냐하면 1번 컴퓨터로부터 걸린 컴퓨터 수니깐
