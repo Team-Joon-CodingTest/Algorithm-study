@@ -18,7 +18,7 @@ t = int(input())
 for _ in range(t):
     k = int(input())
 
-    if is_prime(k): # 소수라면
+    if is_prime(k):  # 소수라면
         print(0)
     else:
         i, j = k, k
@@ -36,4 +36,3 @@ for _ in range(t):
             cnt += 1
             # print("오른쪽", i, j)
         print(cnt)
-

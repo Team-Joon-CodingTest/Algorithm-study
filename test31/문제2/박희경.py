@@ -7,27 +7,25 @@ cards = list(map(int, input().split()))  # 상근이가 가지고 있는 숫자�
 
 m = int(input())
 is_card = list(map(int, input().split()))
-
-sorted(cards)
-
-
-def binarySearch(start, end, target):
-    mid = (start + end) // 2
-    if mid == target:
-        return mid
-    elif mid > target:
-        end = mid + 1
-        binarySearch(start, end, target)
-
-    elif mid < target:
-        start = mid + 1
-        binarySearch(start, end, target)
+cards.sort()
 
 
-for c in is_card:
-    if binarySearch(0, len(cards)-1, c):
-        c = 1
+def binarySearch(arr, target):
+    start, end = 0, n-1
+    while start <= end:
+        mid = (start + end) // 2
+        if arr[mid] == target:
+            return arr[mid]
+        elif arr[mid] > target:
+            end = mid - 1
+        else:
+            start = mid + 1
+
+
+for i in range(len(is_card)):
+    if binarySearch(cards, is_card[i]):
+        is_card[i] = 1
     else:
-        c = 0
+        is_card[i] = 0
 
 print(*is_card)
