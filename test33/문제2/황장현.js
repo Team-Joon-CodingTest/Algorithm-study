@@ -20,7 +20,7 @@ function solution(input) {
     return Math.max(...localBudgetRequests);
   }
 
-  let lowLocalBudgetRequest = Math.min(...localBudgetRequests);
+  let lowLocalBudgetRequest = 0;
   let highLocalBudgetRequest = Math.max(...localBudgetRequests);
 
   while (lowLocalBudgetRequest <= highLocalBudgetRequest) {
@@ -40,14 +40,10 @@ function solution(input) {
       0
     );
 
-    console.log(updatelocalBudgetRequests);
-    console.log(tempSum, '>=', M);
-    console.log(midLocalBudgetRequest);
-
-    if (tempSum >= M) {
-      result = midLocalBudgetRequest;
+    if (tempSum > M) {
       highLocalBudgetRequest = midLocalBudgetRequest - 1;
     } else {
+      result = midLocalBudgetRequest;
       lowLocalBudgetRequest = midLocalBudgetRequest + 1;
     }
   }
