@@ -5,11 +5,7 @@ const input = require('fs')
   .split('\n')
   .map((el) => el.split(' ').map(Number));
 
-// function getWood(height) {
-//   return trees.reduce((total, tree) => {
-//     return total + (tree > height ? tree - height : 0);
-//   }, 0);
-// }
+
 const [N] = input[0];
 const [totalBudget] = input[2];
 const budgets = input[1];
