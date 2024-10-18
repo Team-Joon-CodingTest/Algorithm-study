@@ -1,4 +1,5 @@
 import sys
+import math
 
 input = sys.stdin.readline
 
@@ -8,32 +9,22 @@ values = list(map(int, input().split()))
 values.sort()
 start = 0
 end = n - 1
-min_diff = 1000000000
-answer = {}
+min_diff = float('inf')
+answer = ()
 
 while start < end:
     sum = values[start] + values[end]
-    key = sum
-    value = [values[start], values[end]]
-    answer[key] = value
+    diff = abs(sum)
+
+    if diff < min_diff:
+        min_diff = diff
+        answer = (values[start], values[end])
 
     if sum == 0:
-        print(values[start], values[end])
         break
-    elif abs(sum) == 1:
-        print(values[start], values[end])
-        break
+    elif sum > 0:
+        end -= 1
     else:
-        if sum > 0:
-            end -= 1
-        else:
-            start += 1
-        min_diff = min(min_diff, abs(sum))
+        start += 1
 
-
-if min_diff != 1000000000:
-    print(*answer.get(min_diff))
-
-# 다른 테스트 케이스
-# 5
-# -9 -7 -2 -1 4 5
+print(*answer)
