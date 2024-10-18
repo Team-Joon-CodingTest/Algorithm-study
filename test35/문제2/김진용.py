@@ -12,7 +12,7 @@ while end <= n and start <= end:
         end += 1
     elif total > m:
         start += 1
-    else:
+    else:   
         end += 1
 print(cnt)
 
