@@ -1,4 +1,17 @@
 n, m = map(int, input().split())
 
-ary = [i for i in range(1, n+1)]
-print(ary)
+seq = []
+
+def dfs(start):
+    if len(seq) == m:
+        print(' '.join(map(str, seq)))
+        return
+
+    for i in range(start, n + 1):
+        if i not in seq:
+            seq.append(i)
+            dfs(i + 1)
+            print(seq)
+            seq.pop()
+
+dfs(1)
