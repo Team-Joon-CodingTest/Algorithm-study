@@ -11,7 +11,6 @@ def dfs(start):
         if i not in seq:
             seq.append(i)
             dfs(i + 1)
-            print(seq)
             seq.pop()
 
 dfs(1)
