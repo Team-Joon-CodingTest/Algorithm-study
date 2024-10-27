@@ -3,22 +3,21 @@ import sys
 input = sys.stdin.readline
 
 n = int(input())
-rome = ['I', 'V', 'X', 'L']
+rome = [1, 5, 10, 50]
 cnt = 0
+sum_list = set()
 stack = []
 
 
-def bt(depth):
-    global cnt
+def bt(depth, start):
     if depth == n:
-        print(*stack)
-        cnt += 1
-        # return cnt
-    for i in range(n):
-        if rome[i] not in stack:
-            stack.append(rome[i])
-            bt(depth + 1)
-            stack.pop()
+        sum_list.add(sum(stack))
+        return
+    for i in range(start, len(rome)):    # 1, 5 / 5, 1 이렇게 중복 계산을 안 하도록 start 지점 해야 함
+        stack.append(rome[i])
+        bt(depth + 1, i)
+        stack.pop()
 
 
-bt(0)
+bt(0, 0)
+print(len(sum_list))
