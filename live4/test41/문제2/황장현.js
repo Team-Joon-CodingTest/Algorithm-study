@@ -6,7 +6,7 @@ const input = require('fs')
   .map((el) => el.split(' '));
 
 function solution(input) {
-  const N = input[0][0];
+  const N = parseInt(input[0][0], 10);
   const friends = input.slice(1).map((row) => row[0].split(''));
 
   const people = Array.from({ length: N }, (_, i) =>
@@ -25,7 +25,30 @@ function solution(input) {
       }
     }
   }
-  console.log(connections);
+
+  const twoFriends = {};
+
+  for (let person of people) {
+    const nearFriend = connections[person];
+
+    const friendFriends = new Set(nearFriend);
+
+    for (let friend of nearFriend) {
+      const friendsOfFriend = connections[friend];
+
+      for (let twoFriend of friendsOfFriend) {
+        if (twoFriend !== person) {
+          friendFriends.add(twoFriend);
+        }
+      }
+    }
+
+    twoFriends[person] = friendFriends.size;
+  }
+
+  const maxTwoFriends = Math.max(...Object.values(twoFriends));
+
+  return maxTwoFriends;
 }
 
 console.log(solution(input));
