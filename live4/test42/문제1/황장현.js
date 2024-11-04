@@ -7,40 +7,99 @@ const input = require('fs')
 
 function solution(input) {
   const [N, M] = input[0];
-  let result = 0;
-
-  const graph = Array.from({ length: N }, () =>
-    Array.from({ length: N }, () => [0, 0])
-  );
+  const adjList = Array.from({ length: N + 1 }, () => []);
 
   for (let i = 1; i <= M; i++) {
     const [A, B, C] = input[i];
-
-    graph[A - 1][B - 1] = [1, C];
-    graph[B - 1][A - 1] = [1, C];
+    adjList[A].push([B, C]);
+    adjList[B].push([A, C]);
   }
 
-  let index = 0;
-  const visited = new Set();
+  class MinHeap {
+    constructor() {
+      this.heap = [];
+    }
 
-  while (index + 1 < N) {
-    visited.add(index);
-    const current = graph[index];
+    push(node) {
+      this.heap.push(node);
+      this._heapifyUp();
+    }
 
-    const filtered = current.filter(
-      (load) => load[0] === 1 && !visited.has(current.indexOf(load))
-    );
+    pop() {
+      if (this.size() === 1) return this.heap.pop();
+      const root = this.heap[0];
+      this.heap[0] = this.heap.pop();
+      this._heapifyDown();
+      return root;
+    }
 
-    if (filtered.length === 0) break;
+    size() {
+      return this.heap.length;
+    }
 
-    const minLoad = filtered.reduce((min, curr) => {
-      return curr[1] < min[1] ? curr : min;
-    }, filtered[0]);
+    _heapifyUp() {
+      let index = this.heap.length - 1;
+      while (
+        index > 0 &&
+        this.heap[index][0] < this.heap[Math.floor((index - 1) / 2)][0]
+      ) {
+        [this.heap[index], this.heap[Math.floor((index - 1) / 2)]] = [
+          this.heap[Math.floor((index - 1) / 2)],
+          this.heap[index],
+        ];
+        index = Math.floor((index - 1) / 2);
+      }
+    }
 
-    index = current.indexOf(minLoad);
-    result += minLoad[1];
+    _heapifyDown() {
+      let index = 0;
+      while (
+        (index * 2 + 1 < this.heap.length &&
+          this.heap[index][0] > this.heap[index * 2 + 1][0]) ||
+        (index * 2 + 2 < this.heap.length &&
+          this.heap[index][0] > this.heap[index * 2 + 2][0])
+      ) {
+        let smallerChildIndex = index * 2 + 1;
+        if (
+          index * 2 + 2 < this.heap.length &&
+          this.heap[index * 2 + 2][0] < this.heap[index * 2 + 1][0]
+        ) {
+          smallerChildIndex = index * 2 + 2;
+        }
+        [this.heap[index], this.heap[smallerChildIndex]] = [
+          this.heap[smallerChildIndex],
+          this.heap[index],
+        ];
+        index = smallerChildIndex;
+      }
+    }
   }
-  return result;
+
+  function dijkstra(start) {
+    const distances = Array(N + 1).fill(Infinity);
+    const minHeap = new MinHeap();
+    minHeap.push([0, start]);
+    distances[start] = 0;
+
+    while (minHeap.size() > 0) {
+      const [currentCost, currentNode] = minHeap.pop();
+
+      if (currentCost > distances[currentNode]) continue;
+
+      for (const [nextNode, nextCost] of adjList[currentNode]) {
+        const newCost = currentCost + nextCost;
+
+        if (newCost < distances[nextNode]) {
+          distances[nextNode] = newCost;
+          minHeap.push([newCost, nextNode]);
+        }
+      }
+    }
+
+    return distances[N];
+  }
+
+  return dijkstra(1);
 }
 
 console.log(solution(input));
