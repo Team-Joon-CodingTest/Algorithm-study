@@ -4,7 +4,7 @@ import heapq
 input = sys.stdin.readline
 
 n, m, k, x = map(int, input().split())
-graph = [[] for _ in ange(n + 1)]  # 인접 리스트
+graph = [[] for _ in range(n + 1)]  # 인접 리스트
 distance = [sys.maxsize] * (n + 1)  # 시작 노드로부터 각 노드의 가장 짧은 경로
 
 for _ in range(m):
