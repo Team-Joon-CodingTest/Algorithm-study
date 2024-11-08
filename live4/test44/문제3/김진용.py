@@ -3,23 +3,15 @@ callings = ["kai", "kai", "mine", "mine"]
 
 
 def solution(players, callings):
-    stack = []
+    dict = {player: idx for idx, player in enumerate(players)}
 
     for call in callings:
-        while True:
-            if call != players[-1]:
-                stack.append(players.pop())
-            elif call == players[-1]:
-                break
+        idx = dict[call]
 
-        call_user = players.pop()
-        temp = players.pop()
-        players.append(call_user)
-        players.append(temp)
+        players[idx], players[idx-1] = players[idx-1], players[idx]
 
-        while stack:
-            players.append(stack.pop())
-
+        dict[players[idx]] = idx
+        dict[players[idx-1]] = idx-1
     return players
 
 
