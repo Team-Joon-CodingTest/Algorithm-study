@@ -1,23 +1,21 @@
-n = int(input())
-cnt = 0
-if n % 2 == 0:
-    num = n + 1
-    while True:       
-        for i in range(2, 7):
-            if num % i == 0:
-                num = num + 2
-                cnt = cnt + 1
-        if cnt == 0:
-            print(num)
+import sys
+input=sys.stdin.readline
+N=int(input())
 
-else:
+def check(x):
+    for i in range(2,int(x**0.5)+1):
+        if x%i==0:
+            return False
+    return True
+
+for i in range(N):
+    n=int(input())
     while True:
-        for i in range(2, 7):
-            if n % i == 0:
-                n = n + 2
-                cnt = cnt +1
-        
-        if cnt == 0:
+        if n==0 or n==1:
+            print(2)
+            break
+        if check(n):
             print(n)
-
-    
+            break
+        else:
+            n+=1
