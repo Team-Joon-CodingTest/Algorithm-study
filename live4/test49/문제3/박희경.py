@@ -9,12 +9,8 @@ def solution(new_id):
         if id in allowed_chars:
             answer += id
     # 3단계 .. -> .
-    words = answer.split('..')
-    split_answer = []
-    for word in words:
-        if word:
-            split_answer.append(word)
-    answer = '.'.join(split_answer)
+    while '..' in answer:
+        answer = answer.replace('..', '.')
 
     # 4단계
     if answer.startswith('.'):
