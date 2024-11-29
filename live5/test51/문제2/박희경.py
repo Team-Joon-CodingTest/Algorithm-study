@@ -8,17 +8,24 @@ for _ in range(t):
     k = int(k)
 
     start, end = 0, k
-    arr = set()
-    res = []
+    arr = []
+    count_dic = {}
+
     while True:
-        if end == len(w) - 1:
+        if end > len(w):
             break
 
-        arr.add(w[start:end])
+        split_word = w[start:end]
         start += 1
         end += 1
 
-    for a in arr:
-        res.append(sorted(a))
+        # 알파벳으로 카운트하여 카운팅
+        count = str(split_word.count("A")) + str(split_word.count("G")) + str(split_word.count("C")) + str(split_word.count("T"))
 
-    # 많은 문자열 반환
+        if count not in count_dic:
+            count_dic[count] = 1
+        else:
+            count_dic[count] += 1
+
+    print(max(count_dic.values()))
+
