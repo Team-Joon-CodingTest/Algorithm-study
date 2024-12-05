@@ -15,30 +15,22 @@ def solution(X, Y):
     common = []
 
     while True:
-        if x > len(X) - 1:
+        if x > len(X) - 1 or y >= len(Y):
             break
         if X[x] == Y[y]:
             common.append(X[x])
-            Y.remove(Y[y])
             x += 1
-            y = 0
+            y += 1
         elif X[x] < Y[y]:
-            # 1 1 2 2 3 / 1 2 3 4 5
             x += 1
-            y = 0
         else:
             y += 1
-            if y >= len(Y):
-                x += 1
-                y = 0
 
     if len(common) == 0:
-        answer = '-1'
-    else:
-        if len(common) == common.count(0):
-            common = [0]
-
-        common = sorted(common, reverse=True)
-        answer = ''.join(map(str, common))
+        return '-1'
+    common = sorted(common, reverse=True)
+    if common[0] == 0:
+        return '0'
+    answer = ''.join(map(str, common))
 
     return answer
