@@ -1,7 +1,35 @@
 def solution(X, Y):
-    dic = {"0": X.count("0"), "1": X.count("1"), "2": X.count("2"), "3": X.count("3"), "4": X.count("4"), "5": X.count("5"), "6": X.count("6"), "7": X.count("7"), "8": X.count("8"), "9": X.count("9")}
+    dic = {"0": [0, 0],
+           "1": [0, 0],
+           "2": [0, 0],
+           "3": [0, 0],
+           "4": [0, 0],
+           "5": [0, 0],
+           "6": [0, 0],
+           "7": [0, 0],
+           "8": [0, 0],
+           "9": [0, 0]
+           }
     for x in X:
-        dic[x] = Y.count(x)
-    print(dic)
+        dic[x][0] += 1
+    for y in Y:
+        dic[y][1] += 1
 
+    result = ''
+
+    for i in ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0']:
+        for j in range(min(dic[i])):
+            result += i
+
+    if result == '':
+        return '-1'
+    elif len(result) == result.count('0'):
+        return '0'
+
+    return result
+
+print(solution("100", "2345"))
+print(solution("100", "203045"))
+print(solution("100", "123450"))
+print(solution("12321", "42531"))
 print(solution("5525", "1255"))
