@@ -9,22 +9,26 @@ function solution() {
     const testCase = input.slice(1);
 
     for(let i=0; i<testCase.length; i+=2) {
-        const [_,M] = input[i];
-        const level = input[i+1];
-        const marked = level[M];
-        let count = 1;
+        const [_,M] = testCase[i];
+        const level = testCase[i+1];
+        let count = 0;
+        const queue = level.map((priority,initIdx) => ({ priority, initIdx }));
 
-        while(marked !== level[0]){
-            if(level[0] === Math.max(...level)){
-                level.shift();
-                count++;
+        while(queue.length > 0){
+            const curr = queue.shift();
+            const max = Math.max(...queue.map(e => e.priority));
+
+            if(curr.priority < max){
+                queue.push(curr);
             } else {
-                level.shift();
-                level.push(level[0]);
+                count++;
+                if(curr.initIdx === M){
+                    console.log(count);
+                    break;
+                }
             }
         }
 
-        console.log(count);
     }
 
 
