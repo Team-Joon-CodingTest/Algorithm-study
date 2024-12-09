@@ -19,7 +19,8 @@ function solution() {
             result.push(name);
         }
     })
-    result.sort((a,b) => b.localeCompare(a));
+
+    result.sort().reverse();
     console.log(result.join('\n'));
 }
 
