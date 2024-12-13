@@ -43,7 +43,7 @@ jobs:
 
           NEXT_TEST=$((LATEST_TEST + 1))
 
-          LIVE_GROUP=$(((NEXT_TEST - 1) / 10))
+          LIVE_GROUP=$((((NEXT_TEST - 1) / 10) + 1))
 
           echo "NEXT_TEST=test$NEXT_TEST" >> $GITHUB_ENV
           echo "LIVE_FOLDER=live$LIVE_GROUP" >> $GITHUB_ENV
