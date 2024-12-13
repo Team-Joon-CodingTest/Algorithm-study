@@ -6,9 +6,11 @@ def check(string):
     stk = []
 
     for i in ary:
-        if i == '[' and i == '(' and i == '{':
+        # print(stk)
+        if i == '[' or i == '(' or i == '{':
             stk.append(i)
-        elif i == ']':
+
+        if i == ']':
             if stk and stk[-1] == '[':
                 stk.pop()
         elif i == ')':
@@ -17,23 +19,27 @@ def check(string):
         elif i == '}':
             if stk and stk[-1] == '{':
                 stk.pop()
-    print(stk)
+
     if stk:
         return False
     else:
         return True
 
+
 def solution(s):
     result = 0
     sq = deque(list(s))
 
-    for i in range(len(sq)):
-        sq.rotate(-1)
+    if sq.count('{') + sq.count('(') + sq.count('[') == 0:
+        return 0
+    else:
+        for i in range(len(sq)):
+            sq.rotate(-1)
 
-        if check(''.join(sq)):
-            result += 1
+            if check(''.join(sq)):
+                result += 1
 
-    return result
+        return result
 
 
 print(solution("[](){}"))
