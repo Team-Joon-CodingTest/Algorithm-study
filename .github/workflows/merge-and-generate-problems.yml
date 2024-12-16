@@ -64,4 +64,3 @@ jobs:
           NEXT_TEST_NUM=$(echo $NEXT_TEST | grep -o '[0-9]*') 
           git commit -m "$NEXT_TEST_NUM차 폴더 생성"
           git push origin main 
-
