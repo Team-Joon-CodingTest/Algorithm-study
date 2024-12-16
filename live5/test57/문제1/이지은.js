@@ -6,32 +6,34 @@ const input = require('fs')
 
 function solution(input) {
   const n = Number(input[0]);
-  const arr = input.slice(1).map((el) => el.split(' ').map(Number));
-  let answer = [];
+  const commands = input.slice(1).map((el) => el.split(' ').map(Number)); // 명령 배열
   let stack = [];
+  let answer = [];
 
   for (let i = 0; i < n; i++) {
-    console.log('숫자', arr[i][0]);
-
-    if (arr[i][0] === 1) {
-      stack.push(arr[i][1]);
-    } else if (arr[i][0] === 2) {
-      console.log(stack[0]);
-      
-      stack[0] ? answer.pop(stack.shift()) : answer.push(-1);
-    } else if (arr[i][0] === 3) {
+    const command = commands[i][0];
+    if (command === 1) {
+      stack.push(commands[i][1]);
+    } else if (command === 2) {
+      if (stack.length > 0) {
+        answer.push(stack.pop());
+      } else {
+        answer.push(-1);
+      }
+    } else if (command === 3) {
       answer.push(stack.length);
-    } else if (arr[i][0] === 4) {
-      stack[0] ? answer.push(0) : answer.push(1);
-    } else {
-      stack[0] ? answer.push(stack.pop()) : answer.push(-1);
+    } else if (command === 4) {
+      answer.push(stack.length === 0 ? 1 : 0);
+    } else if (command === 5) {
+      if (stack.length > 0) {
+        answer.push(stack[stack.length - 1]);
+      } else {
+        answer.push(-1);
+      }
     }
-    console.log(answer);
   }
-  return answer;
+
+  return answer.join('\n');
 }
 
 console.log(solution(input));
-
-// let a = [1, 2, 3]
-// console.log(a.pop());
