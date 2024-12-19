@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check if the repository is from Live-Coding-Test
+        run: |
+          if [ "${{ github.repository_owner }}" != "Live-Coding-Test" ]; then
+            echo "This workflow is only allowed to run in the main repository (Live-Coding-Test)."
+            exit 0
+          fi
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
