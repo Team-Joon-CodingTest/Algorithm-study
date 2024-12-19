@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check if the repository is from Live-Coding-Test
+        run: |
+          if [ "${{ github.repository_owner }}" != "Live-Coding-Test" ]; then
+            echo "This workflow is only allowed to run in the main repository (Live-Coding-Test)."
+            exit 0
+          fi
+
       - name: Checkout Repository
         uses: actions/checkout@v3
 
@@ -29,12 +36,24 @@ jobs:
           
           if [ -n "$PR_LIST" ]; then
             for PR in $PR_LIST; do
-              echo "Merging PR #$PR..."
-              gh pr merge $PR --squash --admin 
+              echo "Fetching details for PR #$PR..."
+              BASE_BRANCH=$(gh pr view $PR --json baseRefName -q '.baseRefName')
+
+              echo "Updating base branch '$BASE_BRANCH'..."
+              git fetch origin $BASE_BRANCH
+              git checkout $BASE_BRANCH
+              git pull origin $BASE_BRANCH
+
+              echo "Attempting to merge PR #$PR..."
+              gh pr merge $PR --squash --admin || {
+                echo "Merge failed for PR #$PR. Skipping..."
+                continue
+              }
             done
           else
             echo "No open PRs to merge."
           fi
+
 
       - name: Determine Next Test Folder
         id: determine-folder
