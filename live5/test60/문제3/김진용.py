@@ -1,7 +1,16 @@
 def solution(s):
-    cnt = s.count('1')
-
-    while bin(cnt)[2:] != 1:
+    cnt = 0
+    cnt_0 = 0
+    while True:
+        cnt_0 += s.count('0')
+        s = '1' * s.count('1')
+        temp = bin(len(s))[2:]
+        # print(temp)
+        cnt += 1
+        if temp == '1':
+            break
+        s = temp
+    return[cnt, cnt_0]
 
 
 
