@@ -1,5 +1,6 @@
-from collections import deque
-
+import sys
+input = sys.stdin.readline
+sys.setrecursionlimit(10**9)
 t = int(input())
 
 
