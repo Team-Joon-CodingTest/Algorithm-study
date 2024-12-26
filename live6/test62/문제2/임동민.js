@@ -23,7 +23,7 @@ function solution() {
     }
 
     testCase.forEach(([start, end]) => {
-        result.push(mistake[end-1] - mistake[start - 2]);
+        result.push(mistake[end-1] - mistake[start - 1]);
     })
 
     console.log(result.join('\n'));
