@@ -17,7 +17,4 @@ q = int(input())
 for _ in range(q):
     x, y = map(int, input().split())
 
-    if x == y:
-        print(0)
-    else:
-        print(dp[y-1] - dp[x-1])
+    print(dp[y-1] - dp[x-1])
