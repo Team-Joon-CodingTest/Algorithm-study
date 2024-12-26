@@ -1,14 +1,10 @@
 def solution(citations):
-    citations.sort(reverse=True)
-    print(citations)
+    citations.sort()
 
     for i in range(len(citations)):
-        print(citations[i], i+1)
-        if citations[i] < i + 1:
-            print(citations[i], i + 1)
-            return i
+        if citations[i] >= len(citations) - i:
+            return len(citations) - i
 
-    return len(citations)
-
+    return 0
 
 print(solution([3, 0, 6, 1, 5]))
