@@ -46,7 +46,7 @@ jobs:
               git pull origin $BASE_BRANCH
 
               echo "Attempting to merge PR #$PR..."
-              gh pr merge $PR --squash --admin || {
+              gh pr merge $PR --merge --admin || {
                 echo "Merge failed for PR #$PR. Skipping..."
                 continue
               }
