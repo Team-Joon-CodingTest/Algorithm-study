@@ -19,6 +19,12 @@ def dfs(x, y):
     dx = [graph[x][y],0] # 오른쪽
     dy = [0,graph[x][y]] # 아래쪽
 
+    for i in range(2):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        
+        if 0 <= nx < n and 0<=ny < n and visited[nx][ny] == 0: # 구간 내이고 방문하지 않은 위치라면
+            dfs(nx, ny)
     
 dfs(0, 0)
 
