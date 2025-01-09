@@ -18,6 +18,7 @@ function solution(input) {
     }
   }
   return year
+  
 }
 
 console.log(solution(input));
