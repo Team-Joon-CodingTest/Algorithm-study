@@ -6,19 +6,15 @@ const input = require('fs')
   .map((el) => el.split(' ').map(Number));
 
 function solution(input) {
-  let [N, KIM, IM] = input[0];
-  let answer = 0;
-  while (KIM !== IM) {
-    if (N % 2 === 1 && (KIM === N || IM === N)) {
-      if (KIM === N) KIM = Math.ceil(KIM / 2);
-      if (IM === N) IM = Math.ceil(IM / 2);
-    } else {
-      KIM = Math.ceil(KIM / 2);
-      IM = Math.ceil(IM / 2);
-    }
-    answer++;
+  let [N, K] = input[0];
+  const Ai = input.slice(1);
+  Ai.sort((a, b) => b - a);
+  let count = 0;
+  for (const coin of Ai) {
+    count += Math.floor(K / coin);
+    K %= coin;
   }
-  return answer;
+  return count;
 }
 
 console.log(solution(input));
