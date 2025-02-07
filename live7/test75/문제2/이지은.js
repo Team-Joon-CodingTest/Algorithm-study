@@ -19,6 +19,8 @@ function solution(input) {
     if (idx >= n) return;
 
     const [s, b] = arr[idx];
+
+    
     backtrack(idx + 1, sour * s, bitter + b, count + 1);
 
     backtrack(idx + 1, sour, bitter, count);
